@@ -49,14 +49,14 @@ https://api.bliztik.web.id/apitiktok
 | Content | Result |
 | --- | --- |
 | 🎬 TikTok video | ✅ |
-| 🚫 No-watermark video | ✅ Available |
+| 🚫 No-watermark video | ✅ |
 | ▶️ Video preview | ✅ |
-| 🎵 Audio / music | ✅ Available |
+| 🎵 Audio / music | ✅ |
 | 📸 Photos | ✅ |
 | 🖼️ Slideshows | ✅ |
-| 👤 Author information | ✅ Available |
-| 🖼️ Cover | ✅ Available |
-| 📊 Video metadata | ✅ Available |
+| 👤 Author information | ✅ |
+| 🖼️ Cover | ✅ |
+| 📊 Video metadata | ✅ |
 
 ---
 
@@ -320,7 +320,7 @@ The API returns:
 }
 ```
 
-Available fields:
+ fields:
 
 | Field | Meaning |
 | --- | --- |
