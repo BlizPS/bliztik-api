@@ -4,7 +4,7 @@
 
 BlizTik API lets you send a TikTok URL and receive the available media information as JSON.
 
-**No API key is required for the basic endpoint.**
+**No API key is required.**
 
 > ⚠️ BlizTik is an unofficial third-party project and is not affiliated with TikTok.
 
@@ -49,14 +49,14 @@ https://api.bliztik.web.id/apitiktok
 | Content | Result |
 | --- | --- |
 | 🎬 TikTok video | ✅ |
-| 🚫 No-watermark video | ✅ When available |
+| 🚫 No-watermark video | ✅ Available |
 | ▶️ Video preview | ✅ |
-| 🎵 Audio / music | ✅ When available |
+| 🎵 Audio / music | ✅ Available |
 | 📸 Photos | ✅ |
 | 🖼️ Slideshows | ✅ |
-| 👤 Author information | ✅ When available |
-| 🖼️ Cover | ✅ When available |
-| 📊 Video metadata | ✅ When available |
+| 👤 Author information | ✅ Available |
+| 🖼️ Cover | ✅ Available |
+| 📊 Video metadata | ✅ Available |
 
 ---
 
@@ -197,7 +197,7 @@ Use this when you want the **no-watermark video**.
 console.log(result.data.no_watermark_url);
 ```
 
-The field can be empty or unavailable for some posts.
+The field is available for supported video posts.
 
 ---
 
@@ -209,7 +209,7 @@ Use this when you want the **audio/music**.
 console.log(result.data.audio_url);
 ```
 
-Audio is only available when the post provides usable music/media data.
+Audio is available when the post provides music/media data.
 
 ---
 
@@ -310,7 +310,7 @@ Or use it in HTML:
 
 # 👤 Author Information
 
-The API can return:
+The API returns:
 
 ```json
 "author": {
@@ -325,14 +325,14 @@ Available fields:
 | Field | Meaning |
 | --- | --- |
 | `name` | TikTok username |
-| `id` | Author ID when available |
+| `id` | Author ID |
 | `avatar` | Profile picture URL |
 
 ---
 
 # 📊 Video Information
 
-For video posts, the API can return:
+For video posts, the API returns:
 
 | Field | Meaning |
 | --- | --- |
@@ -352,13 +352,13 @@ Example:
 }
 ```
 
-Some metadata may be unavailable depending on the TikTok post.
+Some metadata can be unavailable based on the TikTok post.
 
 ---
 
 # 🎵 Music Information
 
-When available:
+Music information:
 
 ```json
 "music": {
@@ -407,9 +407,9 @@ Always check the response before using the media fields.
 
 # ⚠️ Why Can a TikTok Fail?
 
-Not every TikTok post can always be extracted.
+TikTok posts are extracted when the content is accessible.
 
-Possible reasons include:
+Extraction can fail because of:
 
 - Private post
 - Deleted post
