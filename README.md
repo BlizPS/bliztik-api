@@ -1,38 +1,22 @@
 # BlizTik API
 
-Simple HTTP API for extracting TikTok media information and downloadable media.
+> Simple HTTP API to get TikTok video, photo, audio, and metadata.
 
-BlizTik API is designed for developers who want to process TikTok URLs without building the media extraction layer themselves.
+BlizTik API lets you send a TikTok URL and receive the available media information as JSON.
 
-> **Unofficial API:** BlizTik is not affiliated with, sponsored by, or endorsed by TikTok.
+**No API key is required for the basic endpoint.**
 
----
-
-## Features
-
-- 🎬 TikTok video extraction
-- 🚫 No-watermark video when available
-- ▶️ Video preview URL
-- 📸 TikTok photos and slideshows
-- 🎵 Music / audio when available
-- 🖼️ Cover and author information
-- 📊 Video metadata
-- 🔗 Separate media URLs
-- 🌐 CORS support
-- 🛡️ Basic request protection and rate limiting
-- ⚡ Simple HTTP GET requests
+> ⚠️ BlizTik is an unofficial third-party project and is not affiliated with TikTok.
 
 ---
 
-## API Endpoint
+## 🚀 Quick Start
 
-### Parse a TikTok URL
+You only need one request:
 
-```http
+```text
 GET https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL
 ```
-
-The TikTok URL should be URL-encoded when used as a query parameter.
 
 ### Example
 
@@ -40,7 +24,43 @@ The TikTok URL should be URL-encoded when used as a query parameter.
 https://api.bliztik.web.id/apitiktok?url=https%3A%2F%2Fwww.tiktok.com%2F%40username%2Fvideo%2F123456789
 ```
 
+The API returns JSON containing the detected post type and available media.
+
 ---
+
+## 🌐 Try BlizTik
+
+Website:
+
+```text
+https://bliztik.web.id
+```
+
+API:
+
+```text
+https://api.bliztik.web.id/apitiktok
+```
+
+---
+
+# 📌 What Can It Get?
+
+| Content | Result |
+| --- | --- |
+| 🎬 TikTok video | ✅ |
+| 🚫 No-watermark video | ✅ When available |
+| ▶️ Video preview | ✅ |
+| 🎵 Audio / music | ✅ When available |
+| 📸 Photos | ✅ |
+| 🖼️ Slideshows | ✅ |
+| 👤 Author information | ✅ When available |
+| 🖼️ Cover | ✅ When available |
+| 📊 Video metadata | ✅ When available |
+
+---
+
+# 📥 How to Use the API
 
 ## JavaScript
 
@@ -53,9 +73,9 @@ const apiUrl =
   encodeURIComponent(tiktokUrl);
 
 const response = await fetch(apiUrl);
-const data = await response.json();
+const result = await response.json();
 
-console.log(data);
+console.log(result);
 ```
 
 ---
@@ -68,11 +88,35 @@ curl "https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL"
 
 ---
 
-# Response
+## Node.js
 
-A successful request returns a JSON response.
+```js
+async function parseTikTok(tiktokUrl) {
+  const api =
+    "https://api.bliztik.web.id/apitiktok?url=" +
+    encodeURIComponent(tiktokUrl);
 
-## Video Response
+  const response = await fetch(api);
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+const result = await parseTikTok(
+  "https://www.tiktok.com/@username/video/123456789"
+);
+
+console.log(result);
+```
+
+---
+
+# 📦 API Response
+
+A successful request looks like this:
 
 ```json
 {
@@ -100,7 +144,7 @@ A successful request returns a JSON response.
     "images": [],
     "music": {
       "title": "Music title",
-      "author": "Music author",
+      "author": "Artist",
       "url": "https://...",
       "cover": "https://..."
     }
@@ -108,88 +152,165 @@ A successful request returns a JSON response.
 }
 ```
 
-### Video URL fields
+---
 
-| Field | Description |
-| --- | --- |
-| `preview_url` | URL intended for video preview/playback |
-| `no_watermark_url` | No-watermark video download URL when available |
-| `audio_url` | Audio/music URL when available |
-| `link` | Original TikTok post URL |
+# 🔎 Important Fields
 
-Each media URL is returned separately so applications can use them independently.
+## `type`
+
+Tells you what kind of TikTok post was detected.
+
+```text
+video
+photo
+```
+
+Example:
+
+```js
+if (result.data.type === "video") {
+  // Video post
+}
+
+if (result.data.type === "photo") {
+  // Photo / slideshow post
+}
+```
 
 ---
 
-# Photo / Slideshow Response
+## `preview_url`
 
-Photo and slideshow posts use:
+Use this when you want to **preview or play the video**.
+
+```js
+console.log(result.data.preview_url);
+```
+
+---
+
+## `no_watermark_url`
+
+Use this when you want the **no-watermark video**.
+
+```js
+console.log(result.data.no_watermark_url);
+```
+
+The field can be empty or unavailable for some posts.
+
+---
+
+## `audio_url`
+
+Use this when you want the **audio/music**.
+
+```js
+console.log(result.data.audio_url);
+```
+
+Audio is only available when the post provides usable music/media data.
+
+---
+
+## `images`
+
+For TikTok photo/slideshow posts, use:
+
+```js
+console.log(result.data.images);
+```
+
+Example:
 
 ```json
-{
-  "code": 200,
-  "msg": "Parse successful - Bliz",
-  "data": {
-    "platform": "TikTok",
-    "type": "photo",
-    "title": "Example photo post",
-    "desc": "Example description",
-    "author": {
-      "name": "username",
-      "id": "",
-      "avatar": "https://..."
-    },
-    "cover": "https://...",
-    "link": "https://www.tiktok.com/@username/photo/123456789",
-    "images": [
-      "https://...",
-      "https://...",
-      "https://..."
-    ],
-    "music": {
-      "title": "Music title",
-      "author": "Music author",
-      "url": "https://...",
-      "cover": "https://..."
-    }
+"images": [
+  "https://...",
+  "https://...",
+  "https://..."
+]
+```
+
+The images are returned in their detected order.
+
+---
+
+# 🎬 Video Example
+
+For a video:
+
+```js
+const data = result.data;
+
+console.log("Title:", data.title);
+console.log("Author:", data.author.name);
+console.log("Preview:", data.preview_url);
+console.log("Video:", data.no_watermark_url);
+console.log("Audio:", data.audio_url);
+```
+
+You can use `preview_url` as the video source:
+
+```html
+<video
+  controls
+  playsinline
+  src="YOUR_PREVIEW_URL">
+</video>
+```
+
+---
+
+# 📸 Photo Example
+
+For a photo/slideshow:
+
+```js
+const data = result.data;
+
+if (data.type === "photo") {
+  for (const image of data.images) {
+    console.log(image);
   }
 }
 ```
 
-The `images` array contains the detected slideshow images in their original order.
+Simple HTML example:
 
----
+```js
+for (const image of data.images) {
+  const img = document.createElement("img");
 
-# Live Photo
+  img.src = image;
+  img.loading = "lazy";
 
-TikTok Live Photos are returned as:
-
-```json
-{
-  "type": "video"
+  document.body.appendChild(img);
 }
 ```
 
-because a Live Photo contains a video component.
+---
+
+# 🎵 Audio Example
+
+```js
+const audio = result.data.audio_url;
+
+if (audio) {
+  console.log("Audio:", audio);
+}
+```
+
+Or use it in HTML:
+
+```html
+<audio controls src="YOUR_AUDIO_URL"></audio>
+```
 
 ---
 
-# Response Fields
+# 👤 Author Information
 
-## Main fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `code` | number | API status code |
-| `msg` | string | Response message |
-| `data.platform` | string | Platform name |
-| `data.type` | string | `video` or `photo` |
-| `data.title` | string | TikTok title |
-| `data.desc` | string | TikTok description |
-| `data.cover` | string | Cover image URL |
-| `data.link` | string | Original TikTok URL |
-
-## Author
+The API can return:
 
 ```json
 "author": {
@@ -199,23 +320,45 @@ because a Live Photo contains a video component.
 }
 ```
 
-## Video metadata
+Available fields:
 
-| Field | Description |
+| Field | Meaning |
 | --- | --- |
-| `quality` | Detected video quality |
-| `duration` | Video duration in seconds |
+| `name` | TikTok username |
+| `id` | Author ID when available |
+| `avatar` | Profile picture URL |
+
+---
+
+# 📊 Video Information
+
+For video posts, the API can return:
+
+| Field | Meaning |
+| --- | --- |
+| `quality` | Detected quality |
+| `duration` | Duration in seconds |
 | `width` | Video width |
 | `height` | Video height |
-| `preview_url` | Video preview endpoint |
-| `no_watermark_url` | No-watermark video endpoint |
-| `audio_url` | Audio endpoint when available |
 
-Metadata availability can depend on the TikTok post and the data returned at request time.
+Example:
 
-## Music
+```json
+{
+  "quality": "1080p",
+  "duration": 22,
+  "width": 1080,
+  "height": 1920
+}
+```
 
-When music information is available:
+Some metadata may be unavailable depending on the TikTok post.
+
+---
+
+# 🎵 Music Information
+
+When available:
 
 ```json
 "music": {
@@ -226,114 +369,21 @@ When music information is available:
 }
 ```
 
----
-
-# Media Types
-
-| Media | Availability |
-| --- | --- |
-| TikTok video | ✅ Available |
-| No-watermark video | ✅ When available |
-| Video preview | ✅ Available |
-| Music / audio | ✅ When available |
-| TikTok photo | ✅ Available |
-| Slideshow | ✅ Available |
-| Live Photo | ✅ Returned as video |
-| Author information | ✅ Available when detected |
-| Cover image | ✅ Available when detected |
-| Video metadata | ✅ When available |
-
----
-
-# Using the Media URLs
-
-## Video Preview
-
-Use:
-
-```text
-preview_url
-```
-
-This URL is intended for video playback or preview.
-
-## No-Watermark Video
-
-Use:
-
-```text
-no_watermark_url
-```
-
-When available, this endpoint provides the no-watermark video stream.
-
-## Audio / Music
-
-Use:
-
-```text
-audio_url
-```
-
-This provides the audio/music stream when available.
-
-## Photos
-
-Use:
-
-```text
-images[]
-```
-
-Each item represents one image from the TikTok slideshow.
-
----
-
-# Node.js Example
+You can access it with:
 
 ```js
-async function getTikTok(url) {
-  const api =
-    "https://api.bliztik.web.id/apitiktok?url=" +
-    encodeURIComponent(url);
-
-  const response = await fetch(api);
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
-
-  return await response.json();
-}
-
-const result = await getTikTok(
-  "https://www.tiktok.com/@username/video/123456789"
-);
-
-if (result.code === 200) {
-  const data = result.data;
-
-  console.log("Type:", data.type);
-
-  if (data.type === "video") {
-    console.log("Preview:", data.preview_url);
-    console.log("No watermark:", data.no_watermark_url);
-    console.log("Audio:", data.audio_url);
-  }
-
-  if (data.type === "photo") {
-    console.log("Photos:", data.images);
-  }
-}
+console.log(result.data.music.title);
+console.log(result.data.music.author);
+console.log(result.data.music.url);
 ```
 
 ---
 
-# Error Response
+# ❌ Error Response
 
-If a request cannot be processed, the API may return an error.
+If the API cannot process the URL, check the `code` and `msg`.
 
-### Invalid URL
+Example:
 
 ```json
 {
@@ -342,7 +392,7 @@ If a request cannot be processed, the API may return an error.
 }
 ```
 
-### Temporary media parsing error
+Temporary media extraction problems may return:
 
 ```json
 {
@@ -351,46 +401,70 @@ If a request cannot be processed, the API may return an error.
 }
 ```
 
-Applications should check `code` before using media fields.
+Always check the response before using the media fields.
 
 ---
 
-# How It Works
+# ⚠️ Why Can a TikTok Fail?
+
+Not every TikTok post can always be extracted.
+
+Possible reasons include:
+
+- Private post
+- Deleted post
+- Region restriction
+- Age/account restriction
+- TikTok changes
+- TikTok anti-bot protection
+- Temporary CDN errors
+- Temporary rate limiting
+- Media unavailable at the time of the request
+
+A URL that works today may fail later if TikTok changes how the content is delivered.
+
+---
+
+# 🧩 Simple Integration Flow
 
 ```text
-TikTok URL
-    ↓
+Your App
+   │
+   │ TikTok URL
+   ▼
 BlizTik API
-    ↓
-TikTok media extraction
-    ↓
-Media processing
-    ↓
-JSON response
-    ↓
-Your application
+   │
+   │ JSON
+   ▼
+Your App
+   │
+   ├── Video → preview_url
+   ├── Video → no_watermark_url
+   ├── Audio → audio_url
+   └── Photo → images[]
 ```
 
-For video posts, BlizTik can provide separate endpoints for preview, no-watermark video, and audio when those media are available.
+That's it. You don't need to build the TikTok extraction logic yourself.
 
 ---
 
-# Supported Applications
+# 🛠️ Useful for
 
-BlizTik API can be used from almost anything that can make an HTTP request:
+BlizTik API can be integrated into:
 
 - 🌐 Websites
-- 📱 Android applications
-- 🟢 Node.js projects
+- 📱 Android apps
+- 🟢 Node.js applications
+- 🐍 Python applications
 - 🤖 Discord bots
 - 💬 WhatsApp bots
-- ⚙️ Backend services
-- 🔧 Automation tools
-- 📦 Other applications
+- ⚙️ Automation tools
+- 🔧 Backend services
+- 📦 Downloader applications
 
 ---
 
-# Project Structure
+# 📁 Repository Structure
 
 ```text
 BlizTik-API/
@@ -403,105 +477,102 @@ BlizTik-API/
 └── ...
 ```
 
-The `assets` folder contains images used only for the documentation.
-
 ---
 
-# Preview
+# 🖼️ Preview
 
 ### API Request
 
 ![BlizTik API request](assets/blizTikApi-request.png)
 
-### Video Result
+### Video
 
-![BlizTik API video result](assets/blizTikApi-video.png)
+![BlizTik API video](assets/blizTikApi-video.png)
 
-### Photo Result
+### Photo
 
-![BlizTik API photo result](assets/blizTikApi-photo.png)
+![BlizTik API photo](assets/blizTikApi-photo.png)
 
-### Audio Result
+### Audio
 
-![BlizTik API audio result](assets/blizTikApi-audio.png)
-
----
-
-# Rate Limits & Request Protection
-
-Basic request protection and rate limiting are enabled.
-
-Please avoid:
-
-- Sending excessive requests
-- Repeatedly requesting the same URL at high speed
-- Using the API for unnecessary continuous polling
-
-For applications with repeated requests, cache results when appropriate.
+![BlizTik API audio](assets/blizTikApi-audio.png)
 
 ---
 
-# CORS
+# 🌐 CORS
 
-BlizTik API supports cross-origin requests.
-
-This makes it possible to use the API from browser-based applications as well as backend services.
+BlizTik API supports cross-origin requests, so it can be called from browser-based applications as well as backend applications.
 
 ---
 
-# Notes & Limitations
+# 🚦 Rate Limits
 
-BlizTik API is a best-effort TikTok media extraction service.
+Basic request protection and rate limiting may be applied.
 
-Not every TikTok post is guaranteed to return every media field.
+Please avoid sending excessive requests.
 
-A post may fail or return incomplete data because of:
-
-- Private posts
-- Deleted posts
-- Region restrictions
-- Age or account restrictions
-- TikTok changes
-- Temporary TikTok CDN errors
-- Anti-bot protection
-- Rate limiting
-- Media that is unavailable at request time
-
-Media availability can change between requests.
+For applications that repeatedly request the same TikTok URL, consider caching the result instead of repeatedly calling the API.
 
 ---
 
-# Example Use Cases
+# 💡 Tips
 
-BlizTik API can be integrated into:
+### Always encode the TikTok URL
 
-- TikTok downloader websites
-- Media management tools
-- Discord bots
-- WhatsApp bots
-- Android applications
-- Web applications
-- Backend services
-- Automation projects
+Use:
+
+```js
+encodeURIComponent(tiktokUrl)
+```
+
+instead of putting the raw URL directly into the query string.
+
+### Check the post type
+
+```js
+if (data.type === "video") {
+  // Handle video
+}
+
+if (data.type === "photo") {
+  // Handle photos
+}
+```
+
+### Check whether media exists
+
+```js
+if (data.no_watermark_url) {
+  // Video is available
+}
+
+if (data.audio_url) {
+  // Audio is available
+}
+
+if (data.images?.length) {
+  // Photos are available
+}
+```
 
 ---
 
-# Visit BlizTik
-
-**Website:** https://bliztik.web.id
-
-**API:** https://api.bliztik.web.id/apitiktok
-
----
-
-# Disclaimer
+# 📜 Disclaimer
 
 BlizTik is an unofficial third-party project and is not affiliated with, sponsored by, or endorsed by TikTok.
 
-Users are responsible for complying with TikTok's terms, applicable laws, and the rights associated with content they access or download.
+Use the API responsibly and make sure your application complies with applicable laws, platform rules, and the rights associated with the content you access.
 
 ---
 
-# License
+## ⭐ Support the Project
 
-See the repository license for the terms applicable to this project.
+If BlizTik is useful to you, you can:
+
+- ⭐ Star the repository
+- 🍴 Fork the project
+- 🐛 Report bugs
+- 💡 Suggest improvements
+- 📢 Share the project with other developers
+
+Thanks for using BlizTik API!
