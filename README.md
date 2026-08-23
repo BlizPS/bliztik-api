@@ -111,7 +111,7 @@ Make sure your own project also follows the rules and policies that apply to the
 
 - **API Test:** https://bliztik-api.vercel.app/
 - **Website:** https://bliztik.web.id
-- **GitHub:** https://github.com/BlizPS/bliztik-api
+- **GitHub:** https://github.com/BlizPS
 
 ## 📌 About
 
