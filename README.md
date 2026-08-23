@@ -96,8 +96,8 @@ Please use the API responsibly and avoid excessive or abusive traffic.
 - **Website:** https://bliztik.web.id
 - **GitHub:** https://github.com/BlizPS/bliztik-api
 
-## 📄 License
+## 📌 About
 
-Released under the MIT License.
+BlizTik API is an open-source project for developers who want a simple way to integrate TikTok media extraction into their applications.
 
-See [`LICENSE`](LICENSE) for the full license text.
+Use the source code, explore the API, build integrations, and adapt the project to your own needs.
