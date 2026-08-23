@@ -90,15 +90,6 @@ BlizTik API works with any application that can make HTTP requests, including:
 - Backend services
 - Other REST API clients
 
-The API can be used with:
-
-- Websites
-- Node.js applications
-- Mobile applications
-- Bots
-- Backend services
-- Other REST API clients
-
 ## 🛡️ Usage notes
 
 BlizTik API is intended for publicly accessible TikTok content.
