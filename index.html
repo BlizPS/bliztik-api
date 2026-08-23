@@ -19,6 +19,7 @@
       --red:#ff6b7a;
     }
     *{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%}
     body{
       margin:0;
       min-height:100vh;
@@ -35,7 +36,7 @@
       display:inline-flex;align-items:center;gap:10px;
       font-weight:800;font-size:22px;letter-spacing:-.4px
     }
-    .brand-mark{width:30px;height:30px;flex:none}
+    .brand-mark{width:30px;height:30px;flex:none;display:block}
     .hero{
       position:relative;overflow:hidden;
       padding:42px 28px 34px;border:1px solid #35517f;
@@ -60,16 +61,18 @@
     }
     .card h2{margin:0 0 7px;font-size:21px}
     .sub{margin:0 0 18px;color:var(--muted);font-size:14px}
-    .row{display:flex;gap:10px}
+    .row{display:flex;gap:10px;align-items:stretch;width:100%}
     input{
-      flex:1;min-width:0;padding:15px 16px;border-radius:12px;
-      border:1px solid #344664;background:#0a1221;color:var(--text);
-      outline:none;font-size:15px
+      flex:1 1 auto;min-width:0;width:100%;height:50px;padding:0 16px;
+      border-radius:12px;border:1px solid #344664;background:#0a1221;color:var(--text);
+      outline:none;font-size:15px;appearance:none;-webkit-appearance:none
     }
     input:focus{border-color:#4a95ff;box-shadow:0 0 0 3px rgba(74,149,255,.14)}
     button{
-      border:0;border-radius:12px;padding:0 22px;background:var(--blue);
-      color:white;font-weight:800;font-size:15px;cursor:pointer
+      appearance:none;-webkit-appearance:none;border:0;border-radius:12px;
+      height:50px;padding:0 22px;background:var(--blue);color:white;
+      font-family:inherit;font-weight:800;font-size:15px;line-height:1;
+      cursor:pointer;flex:0 0 auto;white-space:nowrap
     }
     button:disabled{opacity:.6;cursor:wait}
     .status{
@@ -81,7 +84,11 @@
     .result{display:none;margin-top:18px}
     .result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
     .result h3{font-size:16px;margin:0}
-    .icon-btn{width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:#111b30;border:1px solid var(--line);border-radius:11px;color:#dce7fb;transition:.18s ease}
+    .icon-btn{
+      width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;
+      background:#111b30;border:1px solid var(--line);border-radius:11px;color:#dce7fb;
+      transition:.18s ease;flex:0 0 40px
+    }
     .icon-btn:hover:not(:disabled){border-color:#4a95ff;background:#16233c;transform:translateY(-1px)}
     .icon-btn:disabled{opacity:.45;cursor:not-allowed}
     .icon-btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -91,18 +98,18 @@
     pre{
       margin:0;max-height:520px;overflow:auto;padding:16px;border-radius:14px;
       background:#070d18;border:1px solid var(--line);color:#dce7fb;
-      font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace
+      font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;
+      white-space:pre-wrap;overflow-wrap:anywhere
     }
     .flow{margin-top:20px;padding:18px;border:1px solid var(--line);border-radius:20px;background:#0e1728}
     .flow img{display:block;width:100%;height:auto;border-radius:14px}
-    footer{padding:30px 0 50px;display:flex;justify-content:center}
-    .timing-note{margin-top:9px;color:var(--muted);font-size:12px}
+    footer{padding:30px 0 50px;display:flex;justify-content:center;color:var(--muted);font-size:12px}
     @media(max-width:620px){
       header{padding-top:28px}
       .hero{padding:32px 20px}
-      .row{flex-direction:column}
-      button{height:50px}
-      input{width:100%}
+      .row{flex-direction:column;gap:10px}
+      input{width:100%;height:50px}
+      .row > button{width:100%;height:50px;border-radius:12px}
     }
   </style>
 </head>
@@ -131,7 +138,7 @@
       <p class="sub">Paste a public TikTok URL to check whether the API responds correctly.</p>
 
       <div class="row">
-        <input id="url" type="url" placeholder="https://www.tiktok.com/@user/video/..." autocomplete="off">
+        <input id="url" type="url" placeholder="https://www.tiktok.com/@user/video/..." autocomplete="off" spellcheck="false">
         <button id="testBtn" type="button">GET</button>
       </div>
 
@@ -155,10 +162,10 @@
     </section>
 
     <section class="flow">
-      <img src="architecture.svg" alt="BlizTik API flow">
+      <img src="architecture.svg" alt="BlizTik API flow" loading="lazy">
     </section>
 
-
+    <footer>BlizTik API</footer>
   </main>
 
   <script>
@@ -192,9 +199,9 @@
       copyBtn.classList.remove("copied");
       setStatus("Checking API...", "ok");
 
-      // Measure the API round-trip until response headers arrive.
-      // This is the closest browser-side latency measurement to the API request itself.
-      // JSON parsing/body download is intentionally not included in the displayed ms.
+      // Browser-side request timing: starts immediately before fetch()
+      // and stops as soon as fetch() resolves with the HTTP response headers.
+      // This is a real measurement for this browser/network request.
       const started = performance.now();
       const requestUrl = API_BASE + encodeURIComponent(tiktokUrl);
 
@@ -216,8 +223,6 @@
           throw new Error("API returned a non-JSON response.");
         }
 
-        // HTTP status and measured elapsed time come directly from this request.
-        // The JSON is shown exactly as returned by the API.
         json.textContent = JSON.stringify(data, null, 2);
         result.style.display = "block";
         copyBtn.disabled = false;
@@ -228,7 +233,7 @@
           setStatus(`API REACHABLE • HTTP ${response.status} • ${elapsed} ms`, "err");
         }
       } catch (error) {
-        const elapsed = Math.round(performance.now() - started);
+        const elapsed = Math.max(0, Math.round(performance.now() - started));
         setStatus(`API CHECK FAILED • ${elapsed} ms • ${error.message}`, "err");
         result.style.display = "none";
       } finally {

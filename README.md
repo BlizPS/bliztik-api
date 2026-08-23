@@ -16,13 +16,19 @@ BlizTik API lets you process public TikTok URLs and retrieve video, photo, slide
 - ⚡ Simple HTTP requests
 - 🧩 Easy integration
 
-## 🎞️ See It in Action
-
-![BlizTik API Demo](assets/demo.gif)
-
 ## 🔄 API Flow
 
 ![BlizTik API Flow](assets/architecture.svg)
+
+## 🧪 API Test Page
+
+Want to quickly check whether the live API is responding?
+
+Open the test page:
+
+**https://bliztik-api.vercel.app/**
+
+Paste a public TikTok URL and press **GET**. The page shows the HTTP status, real request timing, and the JSON returned by the API.
 
 ## 🚀 Quick Start
 
@@ -53,7 +59,7 @@ curl "https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL"
 
 ## 📦 Response
 
-BlizTik API returns JSON containing the media and metadata extracted from the TikTok post.
+BlizTik API returns JSON containing media information and metadata from the requested TikTok post.
 
 Common fields include:
 
@@ -93,6 +99,7 @@ Please use the API responsibly and avoid excessive or abusive traffic.
 ## 🌐 Links
 
 - **Live API:** https://api.bliztik.web.id
+- **API Test:** https://bliztik-api.vercel.app/
 - **Website:** https://bliztik.web.id
 - **GitHub:** https://github.com/BlizPS/bliztik-api
 
