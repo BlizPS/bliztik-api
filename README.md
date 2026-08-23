@@ -109,7 +109,6 @@ Make sure your own project also follows the rules and policies that apply to the
 
 ## 🌐 Links
 
-- **Live API:** https://api.bliztik.web.id
 - **API Test:** https://bliztik-api.vercel.app/
 - **Website:** https://bliztik.web.id
 - **GitHub:** https://github.com/BlizPS/bliztik-api
