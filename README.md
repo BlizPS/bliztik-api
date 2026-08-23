@@ -4,30 +4,35 @@
 
 ![BlizTik API](assets/banner.png)
 
-BlizTik API accepts a public TikTok URL and returns available media and metadata as JSON.
+BlizTik API lets you process public TikTok URLs and retrieve video, photo, slideshow, audio, and media metadata as JSON.
 
-### ✨ Supports
+## ✨ Features
 
-- 🎬 Video & no-watermark video when available
-- 📸 Photo & slideshow
-- 🎵 Audio / music when available
-- 👤 Author and media metadata
+- 🎬 TikTok video & no-watermark video
+- 📸 Photo & slideshow extraction
+- 🎵 Audio / music extraction
+- 👤 Author & media metadata
 - 🌐 CORS support
 - ⚡ Simple HTTP requests
+- 🧩 Easy integration
 
-## 🎞️ See it in action
+## 🎞️ See It in Action
 
-![BlizTik API demo](assets/demo.gif)
+![BlizTik API Demo](assets/demo.gif)
+
+## 🔄 API Flow
+
+![BlizTik API Flow](assets/architecture.svg)
 
 ## 🚀 Quick Start
 
-**Endpoint**
+### API Endpoint
 
 ```text
 https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL
 ```
 
-**JavaScript**
+### JavaScript
 
 ```js
 const response = await fetch(
@@ -36,10 +41,11 @@ const response = await fetch(
 );
 
 const data = await response.json();
+
 console.log(data);
 ```
 
-**cURL**
+### cURL
 
 ```bash
 curl "https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL"
@@ -47,9 +53,9 @@ curl "https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL"
 
 ## 📦 Response
 
-The API returns JSON with the media available for the supplied TikTok post.
+BlizTik API returns JSON containing the media and metadata extracted from the TikTok post.
 
-Typical data can include:
+Common fields include:
 
 ```text
 video
@@ -63,29 +69,26 @@ width
 height
 ```
 
-The exact fields depend on the source post and upstream result.
+The response structure can vary depending on the type of TikTok post.
 
-## 🔄 How it works
+## 🧩 Integration
 
-```text
-TikTok URL
-    ↓
-BlizTik API
-    ↓
-Media processing
-    ↓
-JSON response
-    ↓
-Your application
-```
+BlizTik API works with any application that can make HTTP requests, including:
 
-Works with any application that can make an HTTP request, including websites, Node.js apps, mobile apps, bots, and backend services.
+- Websites
+- Node.js applications
+- Mobile applications
+- Bots
+- Backend services
+- Other REST API clients
 
-## ⚠️ Notes
+## 🛡️ Usage Notes
 
-Results depend on the public TikTok URL and the media available at request time. Private, removed, restricted, or unavailable posts may return an error or incomplete data.
+BlizTik API is designed for publicly accessible TikTok content.
 
-Please keep requests reasonable and avoid abusive or excessive traffic.
+Private, deleted, restricted, or unavailable posts may return an error or incomplete media data.
+
+Please use the API responsibly and avoid excessive or abusive traffic.
 
 ## 🌐 Links
 
@@ -95,4 +98,6 @@ Please keep requests reasonable and avoid abusive or excessive traffic.
 
 ## 📄 License
 
-MIT License. See [`LICENSE`](LICENSE).
+Released under the MIT License.
+
+See [`LICENSE`](LICENSE) for the full license text.
