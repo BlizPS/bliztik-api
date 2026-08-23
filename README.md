@@ -1,62 +1,50 @@
-🚀 BlizTik API
+# 🚀 BlizTik API
 
-«A simple REST API for retrieving TikTok media and metadata from public URLs.»
+> Simple REST API for getting TikTok media and metadata from public links.
 
-"BlizTik API" (assets/banner.png)
+![BlizTik API](assets/banner.png)
 
-BlizTik API provides a simple way to extract media and basic metadata from public TikTok posts. It can handle videos, photos, slideshows, audio, and author information through a lightweight REST endpoint.
+BlizTik API is made for projects that need to turn a public TikTok URL into useful media data without building the whole extraction flow from scratch.
 
-No SDK required. Just send a TikTok URL and receive a JSON response.
+It can return videos, photos, slideshows, audio, and basic post metadata in JSON, so you can plug it into a website, bot, mobile app, or another backend.
 
-✨ Features
+## ✨ What it can do
 
-- 🎬 TikTok video extraction
-- 🚫 No-watermark video URLs when available
-- 📸 Photo and slideshow support
-- 🎵 Audio and music extraction
-- 👤 Author and post metadata
-- 🌐 CORS support for browser-based applications
-- ⚡ Simple HTTP-based API
-- 🧩 Easy integration with websites, bots, apps, and backends
+- 🎬 Get TikTok videos with no-watermark media
+- 📸 Support photo and slideshow posts
+- 🎵 Get audio and music from TikTok posts
+- 👤 Get author and post metadata
+- 🌐 Support browser-based requests with CORS
+- ⚡ Simple REST API with no SDK required
+- 🧩 Easy to integrate with websites, apps, bots, and backends
 
-🔄 How It Works
+## 🔄 How it works
 
-The API follows a simple request flow:
+The basic flow is straightforward: send a public TikTok URL to the API, let the server process it, then use the JSON response in your project.
 
-TikTok URL
-    ↓
-BlizTik API
-    ↓
-Media extraction
-    ↓
-JSON response
-    ↓
-Your application
+![BlizTik API Flow](assets/architecture.svg)
 
-"BlizTik API Flow" (assets/architecture.svg)
+## 🧪 Try the API
 
-Send a public TikTok URL to the API, and it will process the post and return the available media and metadata as JSON.
+There is a small test page if you just want to see whether the API is responding correctly.
 
-🧪 Try It
+**https://bliztik-api.vercel.app/**
 
-You can test the API directly using the BlizTik API test page:
+Paste a public TikTok URL, press **GET**, and you can see the HTTP status, response time, and returned JSON.
 
-https://bliztik-api.vercel.app/
+## 🚀 Quick start
 
-Paste a public TikTok URL, click GET, and inspect the returned status, response time, and JSON data.
+### Endpoint
 
-🚀 Quick Start
-
-Endpoint
-
+```text
 https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL
+```
 
-Replace "YOUR_TIKTOK_URL" with the TikTok URL you want to process.
+Replace `YOUR_TIKTOK_URL` with the public TikTok URL you want to process. Remember to URL-encode it when building the request yourself.
 
-When constructing the request programmatically, make sure the URL is properly URL-encoded.
+### JavaScript
 
-JavaScript
-
+```js
 const response = await fetch(
   "https://api.bliztik.web.id/apitiktok?url=" +
   encodeURIComponent(tiktokUrl)
@@ -65,17 +53,19 @@ const response = await fetch(
 const data = await response.json();
 
 console.log(data);
+```
 
-cURL
+### cURL
 
+```bash
 curl "https://api.bliztik.web.id/apitiktok?url=YOUR_TIKTOK_URL"
+```
 
-📦 Response
+## 📦 Response
 
-The API returns JSON containing the media and metadata available for the requested post.
+The API responds with JSON. Depending on the TikTok post, the response can contain media URLs and metadata such as:
 
-Common fields may include:
-
+```text
 video
 no_watermark_url
 audio_url
@@ -85,66 +75,47 @@ title
 quality
 width
 height
+```
 
-The returned fields can vary depending on the type of TikTok post.
+The exact fields are not guaranteed to be identical for every post type. A video, slideshow, and photo post naturally have different data, because apparently even social-media URLs needed several species.
 
-For example, a video post may contain video and audio information, while a photo or slideshow post may primarily contain image URLs.
+## 🧩 Integration
 
-🧩 Integration
+BlizTik API works with any application that can make HTTP requests, including:
 
-BlizTik API can be integrated into any application capable of making HTTP requests.
+- Websites
+- Node.js applications
+- Mobile applications
+- Bots
+- Backend services
+- Other REST API clients
 
-Common use cases include:
+The API can be used with:
 
-- 🌐 Web applications
-- 📱 Mobile applications
-- 🤖 Bots
-- 🟢 Node.js applications
-- ⚙️ Backend services
-- 🔌 REST API clients
-- 🛠️ Media utility projects
+- Websites
+- Node.js applications
+- Mobile applications
+- Bots
+- Backend services
+- Other REST API clients
 
-Example architecture:
+## 🛡️ Usage notes
 
-Your Application
-       │
-       │ HTTP Request
-       ▼
-BlizTik API
-       │
-       │ JSON
-       ▼
-Your Application
-       │
-       ├── Display media
-       ├── Process metadata
-       └── Handle downloads
+BlizTik API is intended for publicly accessible TikTok content.
 
-🛡️ Usage
+Private, deleted, restricted, or otherwise unavailable posts may return an error or incomplete data. Avoid sending excessive traffic or using the service in a way that puts unnecessary load on the API.
 
-BlizTik API is designed for publicly accessible TikTok content.
+Make sure your own project also follows the rules and policies that apply to the content and platform you're working with.
 
-Private, deleted, restricted, or otherwise unavailable posts may return an error or incomplete information.
+## 🌐 Links
 
-Please avoid excessive requests or usage patterns that place unnecessary load on the service.
+- **Live API:** https://api.bliztik.web.id
+- **API Test:** https://bliztik-api.vercel.app/
+- **Website:** https://bliztik.web.id
+- **GitHub:** https://github.com/BlizPS/bliztik-api
 
-You are responsible for ensuring that your application and use of retrieved content comply with applicable laws, platform rules, and content rights.
+## 📌 About
 
-🌐 Links
+BlizTik API is an open-source project built to keep TikTok media integration relatively simple: make a request, receive JSON, and handle the result in your own application.
 
-- Live API: https://api.bliztik.web.id
-- API Test: https://bliztik-api.vercel.app/
-- Website: https://bliztik.web.id
-- GitHub: https://github.com/BlizPS/bliztik-api
-
-📄 License
-
-This project is open source. See the repository for the applicable license and project files.
-
-📌 About
-
-BlizTik API is an open-source project focused on making TikTok media integration simple.
-
-Instead of implementing the extraction process yourself, your application can send a public TikTok URL to the API and work with the resulting JSON data.
-
-Built for simple integrations, experiments, and projects that need a lightweight TikTok media API.
+The project is intentionally straightforward so it can be used as a small API service or as a starting point for a larger integration.
