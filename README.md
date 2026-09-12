@@ -10,7 +10,8 @@
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/BlizPS/bliztik-api?style=flat-square)](https://github.com/BlizPS/bliztik-api/commits/main)
 
 **Website:** https://bliztik.web.id  
-**API Base URL:** https://api.bliztik.web.id  
+**Endpoint API Langsung:** https://api.bliztik.web.id/apitiktok?url=  
+**Test API:** https://bliztik-api.vercel.app/  
 **Repository:** https://github.com/BlizPS/bliztik-api
 
 [Website](https://bliztik.web.id) · [Documentation](https://github.com/BlizPS/bliztik-api#-documentation-endpoint) · [Report a Bug](https://github.com/BlizPS/bliztik-api/issues/new) · [Request a Feature](https://github.com/BlizPS/bliztik-api/issues/new)
@@ -680,7 +681,8 @@ BlizTik API is developed and maintained by **BlizPS**.
 - GitHub: https://github.com/BlizPS
 - Repository: https://github.com/BlizPS/bliztik-api
 - Website: https://bliztik.web.id
-- Live API Endpoint: https://api.bliztik.web.id/apitiktok
+- Endpoint API Langsung: https://api.bliztik.web.id/apitiktok?url=
+- Test API: https://bliztik-api.vercel.app/
 
 ### Reporting bugs
 
