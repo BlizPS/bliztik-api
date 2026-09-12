@@ -21,7 +21,7 @@
 
 - [About the Project](#-about-the-project)
 - [Why BlizTik?](#-why-bliztik)
-- [Comparison](#-comparison)
+- [BlizTik Highlights](#-bliztik-highlights)
 - [Quick Start](#-quick-start)
   - [cURL](#curl)
   - [JavaScript](#javascript-fetch)
@@ -76,31 +76,25 @@ Here are the main reasons developers choose BlizTik API:
 - 📱 **Cross-Platform** — works with frontend apps, Node.js, Python, PHP, bots, Android apps, and backend services.
 - 🛠️ **Open Source** — inspect, fork, improve, and build on top of the project.
 
-## ⚖️ Comparison
+## 📊 BlizTik Highlights
 
-The table below compares the integration experience and published/default characteristics of BlizTik with commonly used alternatives.
+BlizTik is focused on keeping the developer experience simple: one endpoint, no API key, and a response designed for easy integration.
 
-> **Note:** Third-party limits and pricing can change over time. Always verify current limits in the provider's own documentation before designing a production architecture around them.
+| Feature | BlizTik |
+| :--- | :---: |
+| **API Key** | ❌ Not required |
+| **Rate Limit** | ♾️ No fixed public quota published |
+| **Speed** | ⚡ Target response under 2s* |
+| **HD Video** | ✅ Supported when available |
+| **No Watermark** | ✅ Supported when available |
+| **Photo / Slideshow** | ✅ Supported |
+| **Audio** | ✅ Supported |
+| **Metadata** | ✅ Supported |
+| **CORS** | ✅ Supported |
+| **Price** | 🆓 Free |
+| **Open Source** | ✅ Yes |
 
-| Feature | BlizTik | TikWM | Others |
-| :--- | :---: | :---: | :---: |
-| **No API Key** | ✅ | ⚠️ Depends on endpoint/service | ⚠️ Varies |
-| **Documented daily quota** | ♾️ No imposed quota published | ⚠️ Varies by service/plan | ⚠️ Varies |
-| **1 req/s restriction** | ✅ No documented public restriction | ⚠️ Commonly documented in clients/services | ⚠️ Varies |
-| **Speed** | ⚡ Target < 2s | ⚡ Fast, varies by endpoint | ⚡ Varies |
-| **HD / No Watermark** | ✅ | ✅ | ✅ / ⚠️ Varies |
-| **Photo / Slideshow** | ✅ | ✅ | ⚠️ Varies |
-| **Audio** | ✅ | ✅ | ⚠️ Varies |
-| **Metadata** | ✅ | ✅ | ✅ / ⚠️ Varies |
-| **CORS** | ✅ | ⚠️ Depends on endpoint | ⚠️ Varies |
-| **Price** | **Free** | Free / paid offerings vary | Free / paid |
-| **Open Source** | ✅ | ❌ | ⚠️ Varies |
-
-### About TikWM and rate limits
-
-Some public projects and third-party clients document or enforce TikWM request throttling such as **1 request per second**, with examples using a **5,000-request daily quota**. Because provider policies can change, treat those figures as a comparison snapshot rather than a permanent promise. citeturn590949search5
-
-The important difference for developers is the integration model: **BlizTik does not require an API key for the public endpoint and does not publish a fixed request quota in this repository.**
+> *Actual response time can vary depending on TikTok availability, network conditions, redirects, upstream extraction, and media complexity.
 
 ---
 
