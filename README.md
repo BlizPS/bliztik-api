@@ -205,7 +205,7 @@ The current response structure is:
 ```json
 {
   "kode": 200,
-  "msg": "Parsing berhasil - Bliz",
+  "msg": "Parsing successful - Bliz",
   "data": {
     "platform": "TikTok",
     "tipe": "video",
@@ -250,22 +250,22 @@ The following example mirrors the **actual field structure returned by the BlizT
 ```json
 {
   "kode": 200,
-  "msg": "Parsing berhasil - Bliz",
+  "msg": "Parsing successful - Bliz",
   "data": {
     "platform": "TikTok",
     "tipe": "video",
-    "judul": "#relatable #trend #animefyp #fypシ #xybca",
-    "desc": "#relatable #trend #animefyp #fypシ #xybca",
+    "judul": "Example TikTok post",
+    "desc": "Example TikTok post description",
     "pengarang": {
-      "nama": "rasbae``",
-      "pengenal": "",
-      "avatar": "https://p16-common-sign.tiktokcdn.com/..."
+      "nama": "Example Creator",
+      "pengenal": "@example",
+      "avatar": "https://example.com/avatar.jpg"
     },
-    "sampul": "https://p16-common-sign.tiktokcdn.com/...",
+    "sampul": "https://example.com/cover.jpg",
     "preview_url": "https://api.bliztik.web.id/api/proxy?...",
     "no_watermark_url": "https://api.bliztik.web.id/api/proxy?...",
     "audio_url": "https://api.bliztik.web.id/api/proxy?...",
-    "tautan": "https://www.tiktok.com/@rassasu/video/7684578677111164181",
+    "tautan": "https://www.tiktok.com/@example/video/...",
     "kualitas": "1024p",
     "durasi": 11,
     "lebar": 576,
@@ -280,7 +280,7 @@ The following example mirrors the **actual field structure returned by the BlizT
     },
     "ekstra": {
       "id_video": "",
-      "share_url": "https://www.tiktok.com/@rassasu/video/7684578677111164181"
+      "share_url": "https://www.tiktok.com/@example/video/..."
     }
   }
 }
@@ -619,7 +619,7 @@ A successful response uses the following top-level structure:
 ```json
 {
   "kode": 200,
-  "msg": "Parsing berhasil - Bliz",
+  "msg": "Parsing successful - Bliz",
   "data": {}
 }
 ```
