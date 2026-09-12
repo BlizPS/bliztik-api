@@ -42,7 +42,7 @@
 - [Contributing](#-contributing)
 - [Disclaimer](#-disclaimer)
 - [License](#-license)
-- [Credits & Support](#-credits--support)
+- [Credits](#-credits)
 
 ---
 
@@ -681,7 +681,7 @@ In short, the MIT License permits use, modification, distribution, and private o
 
 ---
 
-## ❤️ Credits & Support
+## ❤️ Credits
 
 ### Created by BlizPS
 
@@ -691,16 +691,6 @@ BlizTik API is developed and maintained by **BlizPS**.
 - Repository: https://github.com/BlizPS/bliztik-api
 - Website: https://bliztik.web.id
 - API: https://api.bliztik.web.id
-- Email: `hello@bliztik.web.id`
-
-### Support the project
-
-If BlizTik helps your project and you would like to support development, donation links can be added here:
-
-- Saweria: `https://saweria.co/YOUR_USERNAME`
-- Trakteer: `https://trakteer.id/YOUR_USERNAME`
-
-> Replace the placeholder donation usernames above with the official project accounts when they are available.
 
 ### Reporting bugs
 
@@ -744,4 +734,4 @@ https://github.com/BlizPS/bliztik-api
 <p align="center">
   <strong>BlizTik API</strong><br>
   Free · Fast · No API Key · Developer Friendly
-</p
+</p>
