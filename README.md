@@ -649,11 +649,9 @@ Create a PR against the `main` branch and describe:
 - How it was tested
 - Any limitations or follow-up work
 
-For contribution-specific guidelines, see:
+For the latest project context and contribution discussion, visit the repository home:
 
-https://github.com/BlizPS/bliztik-api/blob/main/CONTRIBUTING.md
-
-> `CONTRIBUTING.md` may be expanded as the project adopts more formal contribution rules.
+https://github.com/BlizPS/bliztik-api
 
 ---
 
@@ -673,9 +671,7 @@ BlizTik does not grant you ownership or redistribution rights over third-party c
 
 BlizTik API is released under the **MIT License**.
 
-See the full license text:
-
-https://github.com/BlizPS/bliztik-api/blob/main/LICENSE
+See the full license text in [`LICENSE`](LICENSE).
 
 In short, the MIT License permits use, modification, distribution, and private or commercial use, subject to the license conditions.
 
@@ -710,12 +706,6 @@ Useful bug reports should include:
 - Steps to reproduce
 
 Never post private credentials, API tokens, cookies, or other sensitive information in an issue.
-
----
-
-## 💡 SEO Keywords
-
-BlizTik API, TikTok API, TikTok downloader API, TikTok video downloader API, TikTok no watermark API, TikTok HD downloader, TikTok photo downloader API, TikTok slideshow API, TikTok audio downloader API, TikTok metadata API, free TikTok API, free TikTok downloader, no API key TikTok API, CORS TikTok API, TikTok REST API, TikTok developer API, TikTok media API, TikTok downloader for developers, JavaScript TikTok API, Python TikTok API, Node.js TikTok API, PHP TikTok API, open source TikTok downloader.
 
 ---
 
