@@ -1,6 +1,6 @@
 # BlizTik API
 
-> **A fast, free, no-API-key TikTok downloader API for developers — video, photo, audio, and metadata in one simple request.**
+> **A fast, free TikTok downloader API for developers, with support for video, photos, audio, and metadata through a single request.**
 
 [![MIT License](https://img.shields.io/github/license/BlizPS/bliztik-api?style=flat-square)](https://github.com/BlizPS/bliztik-api/blob/main/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/BlizPS/bliztik-api?style=flat-square)](https://github.com/BlizPS/bliztik-api/stargazers)
@@ -52,11 +52,11 @@
 
 **BlizTik API** is an open-source REST API for extracting downloadable media and useful metadata from public TikTok URLs. It is built for developers who want a simple HTTP interface instead of maintaining the entire extraction workflow themselves.
 
-The API supports **TikTok videos, no-watermark video URLs, photos/slideshows, audio, post metadata, author information, cover images, media dimensions, and duration**. The response is returned as structured JSON so it can be consumed by websites, backend services, bots, mobile applications, automation tools, and other developer projects. 🌐
+The API supports **TikTok videos, no-watermark video URLs, photos and slideshows, audio, post metadata, author information, cover images, media dimensions, and duration**. The response is returned as structured JSON so it can be consumed by websites, backend services, bots, mobile applications, automation tools, and other developer projects. 🌐
 
 BlizTik keeps the integration model intentionally simple: **one public endpoint, no API key, standard GET requests, and browser-friendly CORS support**.
 
-> Built for developers. Simple to integrate. Fast to get started.
+> Built for developers, easy to integrate, and quick to get started.
 
 ---
 
@@ -104,7 +104,7 @@ BlizTik focuses on a straightforward developer experience: use the public endpoi
 
 ## ⚡ Quick Start
 
-The public endpoint accepts a TikTok URL through the `url` query parameter:
+The public endpoint accepts a TikTok URL through the `url` query parameter.
 
 ```text
 https://api.bliztik.web.id/apitiktok?url={TIKTOK_URL}
@@ -170,13 +170,13 @@ print(result)
 | **Output** | JSON |
 | **CORS** | Supported |
 
-The endpoint is designed to accept common public TikTok URLs, including:
+The endpoint supports common public TikTok URL formats, including:
 
 - `https://www.tiktok.com/@username/video/...`
 - `https://vt.tiktok.com/...`
 - `https://vm.tiktok.com/...`
 
-Short links are resolved before the requested TikTok media is parsed.
+Short links are resolved before the TikTok content is processed.
 
 ### Parameters
 
@@ -200,7 +200,7 @@ https://api.bliztik.web.id/apitiktok?url=https%3A%2F%2Fwww.tiktok.com%2F%40usern
 
 A successful request returns an object with a numeric status code, a message, and a nested `data` object.
 
-The documentation-friendly response structure is:
+A typical response has the following structure:
 
 ```json
 {
@@ -245,7 +245,7 @@ The documentation-friendly response structure is:
 
 ## 🧾 Full Response Example
 
-The example below uses **English-friendly field names** to keep the documentation easy to read and free of creator-specific information. The live API may preserve legacy field names in its raw JSON response. Media URLs are shortened for readability and may expire.
+The example below uses neutral sample values so the documentation is easy to read without exposing information from a real TikTok post. Media URLs are shortened for readability and may expire.
 
 ```json
 {
@@ -274,7 +274,7 @@ The example below uses **English-friendly field names** to keep the documentatio
     "images": [],
     "music": {
       "title": "",
-      "artist": "",
+      "author": "",
       "url": "https://api.bliztik.web.id/api/proxy?...",
       "cover": ""
     },
@@ -556,11 +556,11 @@ Because the API supports CORS, it can be called directly from browser-based appl
 
 ## 🗺️ Roadmap
 
-BlizTik currently focuses on its core TikTok downloader API and the features already documented above.
+BlizTik focuses on its core TikTok downloader API and the features documented above.
 
 Future improvements will be announced in the repository as they are planned and implemented.
 
-Have an idea that would make BlizTik better? Open a feature request in the repository.
+Have an idea for improving BlizTik? Open a feature request in the repository.
 
 ---
 
@@ -761,5 +761,5 @@ https://github.com/BlizPS/bliztik-api
 
 <p align="center">
   <strong>BlizTik API</strong><br>
-  Free · Fast · No API Key · Developer Friendly
+  Free · Fast · No API Key · Easy to Integrate
 </p>
