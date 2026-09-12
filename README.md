@@ -66,10 +66,10 @@ Here are the main reasons developers choose BlizTik API:
 - 🔑 **No API Key** — call the endpoint directly; no account key or authentication header is required for the public endpoint.
 - 🚀 **Super Fast** — designed for low-latency processing, with typical responses targeting **under 2 seconds** depending on TikTok availability, network conditions, and media complexity.
 - ♾️ **No Imposed Rate Limit** — the public API is designed without a documented per-user request quota. Please still use reasonable traffic and avoid abusive request patterns.
-- 🎬 **HD Video Support** — retrieve high-quality video media when the source and upstream extractor provide it.
-- 🧼 **No-Watermark Video** — supports no-watermark video URLs where available.
+- 🎬 **HD Video Support** — retrieve high-quality HD video media.
+- 🧼 **No-Watermark Video** — supports no-watermark video URLs.
 - 📸 **Photo & Slideshow Support** — works with TikTok photo posts and multi-image slideshows.
-- 🎵 **Audio Support** — retrieve audio/music information and available media URLs.
+- 🎵 **Audio Support** — retrieve audio/music information and media URLs.
 - 👤 **Metadata Support** — access useful post and author metadata returned by the extractor.
 - 🌐 **CORS Support** — suitable for direct browser-side requests from web apps.
 - 🧩 **REST API** — no official SDK is required; use standard HTTP clients.
@@ -85,8 +85,8 @@ BlizTik is focused on keeping the developer experience simple: one endpoint, no 
 | **API Key** | ❌ Not required |
 | **Rate Limit** | ♾️ No fixed public quota published |
 | **Speed** | ⚡ Target response under 2s* |
-| **HD Video** | ✅ Supported when available |
-| **No Watermark** | ✅ Supported when available |
+| **HD Video** | ✅ Supported |
+| **No Watermark** | ✅ Supported |
 | **Photo / Slideshow** | ✅ Supported |
 | **Audio** | ✅ Supported |
 | **Metadata** | ✅ Supported |
@@ -240,17 +240,17 @@ This example shows the kinds of values an application can consume after a succes
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
-| `video` | `string \| null` | Available video media URL. |
-| `no_watermark_url` | `string \| null` | No-watermark video URL when available. |
-| `audio_url` | `string \| null` | Audio/music media URL when available. |
-| `images` | `array` | Image URLs for photo/slideshow posts. May be empty for videos. |
+| `video` | `string \| null` | Video media URL. |
+| `no_watermark_url` | `string \| null` | No-watermark video URL. |
+| `audio_url` | `string \| null` | Audio/music media URL. |
+| `images` | `array` | Image URLs for photo/slideshow posts. May be empty for video posts. |
 | `author` | `object \| null` | Author metadata returned by the extractor. |
-| `author.username` | `string \| null` | TikTok username/handle when available. |
-| `author.nickname` | `string \| null` | Display name when available. |
-| `title` | `string \| null` | Post caption/title text when available. |
-| `quality` | `string \| null` | Reported media quality when available. |
-| `width` | `number \| null` | Media width in pixels when available. |
-| `height` | `number \| null` | Media height in pixels when available. |
+| `author.username` | `string \| null` | TikTok username/handle. |
+| `author.nickname` | `string \| null` | Display name. |
+| `title` | `string \| null` | Post caption/title text. |
+| `quality` | `string \| null` | Reported media quality. |
+| `width` | `number \| null` | Media width in pixels. |
+| `height` | `number \| null` | Media height in pixels. |
 
 ## 🔧 Code Examples & Integrations
 
@@ -556,7 +556,7 @@ CORS support is intended to make browser-based `fetch()` requests possible witho
 
 ### Does it support `vt.tiktok.com` and `vm.tiktok.com` links?
 
-The endpoint is designed to accept common public TikTok share URLs, including short-link formats such as `vt.tiktok.com` and `vm.tiktok.com`.
+The endpoint accepts common public TikTok share URLs, including short-link formats such as `vt.tiktok.com` and `vm.tiktok.com`.
 
 Short links may redirect before the media is resolved.
 
@@ -603,7 +603,7 @@ https://github.com/BlizPS/bliztik-api/fork
 ### 2. Clone your fork
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/bliztik-api.git
+git clone https://github.com/BlizPS/bliztik-api.git
 cd bliztik-api
 ```
 
@@ -680,7 +680,7 @@ BlizTik API is developed and maintained by **BlizPS**.
 - GitHub: https://github.com/BlizPS
 - Repository: https://github.com/BlizPS/bliztik-api
 - Website: https://bliztik.web.id
-- API: https://api.bliztik.web.id
+- Live API Endpoint: https://api.bliztik.web.id/apitiktok
 
 ### Reporting bugs
 
