@@ -6,7 +6,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/BlizPS/bliztik-api?style=flat-square)](https://github.com/BlizPS/bliztik-api/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/BlizPS/bliztik-api?style=flat-square)](https://github.com/BlizPS/bliztik-api/network/members)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square)](https://github.com/BlizPS/bliztik-api)
-[![API Status](https://img.shields.io/website?url=https%3A%2F%2Fapi.bliztik.web.id&style=flat-square)](https://api.bliztik.web.id)
+[![API Status](https://img.shields.io/badge/API%20Status-Online-brightgreen?style=flat-square)](https://api.bliztik.web.id/apitiktok?url=)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/BlizPS/bliztik-api?style=flat-square)](https://github.com/BlizPS/bliztik-api/commits/main)
 
 **Website:** https://bliztik.web.id  
@@ -33,6 +33,7 @@
   - [Example Request](#example-request)
   - [Response](#response)
 - [Full Response Example](#-full-response-example)
+- [Response Field Reference](#-response-field-reference)
 - [Code Examples & Integrations](#-code-examples--integrations)
   - [Node.js](#nodejs-axios)
   - [Python](#python-aiohttp)
@@ -49,59 +50,65 @@
 
 ## 🚀 About the Project
 
-**BlizTik API** is an open-source REST API for extracting useful media data from public TikTok URLs. It is designed for developers who want a straightforward way to turn a TikTok link into structured JSON without building the entire extraction pipeline themselves.
+**BlizTik API** is an open-source REST API for extracting downloadable media and useful metadata from public TikTok URLs. It is built for developers who want a simple HTTP interface instead of maintaining the entire extraction workflow themselves.
 
-The API can handle common TikTok media types, including **videos, no-watermark video URLs, photos/slideshows, audio, and post metadata**. The service is intended to be easy to integrate into websites, backend services, bots, mobile applications, and other developer tools. 🌐
+The API supports **TikTok videos, no-watermark video URLs, photos/slideshows, audio, post metadata, author information, cover images, media dimensions, and duration**. The response is returned as structured JSON so it can be consumed by websites, backend services, bots, mobile applications, automation tools, and other developer projects. 🌐
 
-BlizTik was created around a simple idea: **developers should be able to test and build quickly without unnecessary API-key setup, complicated SDKs, or platform-specific integration overhead.**
+BlizTik keeps the integration model intentionally simple: **one public endpoint, no API key, standard GET requests, and browser-friendly CORS support**.
 
-> Built for developers. Simple for users. Fast to integrate.
+> Built for developers. Simple to integrate. Fast to get started.
 
 ---
 
 ## ✨ Why BlizTik?
 
-Here are the main reasons developers choose BlizTik API:
-
-- 🆓 **100% Free** — no subscription is required to make requests.
-- 🔑 **No API Key** — call the endpoint directly; no account key or authentication header is required for the public endpoint.
-- 🚀 **Super Fast** — designed for low-latency processing, with typical responses targeting **under 2 seconds** depending on TikTok availability, network conditions, and media complexity.
-- ♾️ **No Imposed Rate Limit** — the public API is designed without a documented per-user request quota. Please still use reasonable traffic and avoid abusive request patterns.
-- 🎬 **HD Video Support** — retrieve high-quality HD video media.
-- 🧼 **No-Watermark Video** — supports no-watermark video URLs.
-- 📸 **Photo & Slideshow Support** — works with TikTok photo posts and multi-image slideshows.
-- 🎵 **Audio Support** — retrieve audio/music information and media URLs.
-- 👤 **Metadata Support** — access useful post and author metadata returned by the extractor.
-- 🌐 **CORS Support** — suitable for direct browser-side requests from web apps.
-- 🧩 **REST API** — no official SDK is required; use standard HTTP clients.
-- 📱 **Cross-Platform** — works with frontend apps, Node.js, Python, PHP, bots, Android apps, and backend services.
-- 🛠️ **Open Source** — inspect, fork, improve, and build on top of the project.
+- 🆓 **100% Free** — no subscription is required to use the public endpoint.
+- 🔑 **No API Key** — send the TikTok URL directly without an authentication key or authorization header.
+- 🚀 **Super Fast** — designed for low-latency processing with a target response time of **under 2 seconds** under normal conditions.
+- ♾️ **No Fixed Public Quota** — no fixed per-user daily quota is published for the public endpoint.
+- 🎬 **HD Video** — supports high-quality video output, including the `1024p` quality shown by the live API response.
+- 🧼 **No-Watermark Video** — provides a dedicated `no_watermark_url` for video downloads.
+- 📸 **Photo & Slideshow** — supports image-based TikTok posts through the `gambar` field.
+- 🎵 **Audio** — provides direct audio information and a downloadable `musik.url` value.
+- 🖼️ **Cover Image** — returns a post cover through the `sampul` field.
+- 👤 **Author Metadata** — returns author name, identifier, and avatar information.
+- 📝 **Post Metadata** — returns title, description, source URL, media type, quality, duration, and dimensions.
+- 🌐 **CORS Support** — suitable for direct browser-side API requests.
+- 🧩 **Simple REST API** — works with standard HTTP clients; no SDK is required.
+- 📱 **Cross-Platform** — suitable for web apps, Node.js, Python, PHP, bots, mobile apps, and backend services.
+- 🛠️ **Open Source** — the project is publicly available on GitHub.
 
 ## 📊 BlizTik Highlights
 
-BlizTik is focused on keeping the developer experience simple: one endpoint, no API key, and a response designed for easy integration.
+BlizTik focuses on a straightforward developer experience: use the public endpoint, provide a TikTok URL, and receive structured JSON containing the extracted media and metadata.
 
 | Feature | BlizTik |
 | :--- | :---: |
 | **API Key** | ❌ Not required |
-| **Rate Limit** | ♾️ No fixed public quota published |
-| **Speed** | ⚡ Target response under 2s* |
+| **Fixed Public Quota** | ♾️ None published |
+| **Speed Target** | ⚡ Under 2s* |
 | **HD Video** | ✅ Supported |
 | **No Watermark** | ✅ Supported |
 | **Photo / Slideshow** | ✅ Supported |
 | **Audio** | ✅ Supported |
 | **Metadata** | ✅ Supported |
+| **Cover Image** | ✅ Supported |
+| **Author Information** | ✅ Supported |
 | **CORS** | ✅ Supported |
 | **Price** | 🆓 Free |
 | **Open Source** | ✅ Yes |
 
-> *Actual response time can vary depending on TikTok availability, network conditions, redirects, upstream extraction, and media complexity.
+> *Actual response time can vary with network conditions, TikTok availability, redirects, upstream extraction, and media complexity.
 
 ---
 
 ## ⚡ Quick Start
 
-The public endpoint accepts a TikTok URL through the `url` query parameter.
+The public endpoint accepts a TikTok URL through the `url` query parameter:
+
+```text
+https://api.bliztik.web.id/apitiktok?url={TIKTOK_URL}
+```
 
 ### cURL
 
@@ -109,26 +116,18 @@ The public endpoint accepts a TikTok URL through the `url` query parameter.
 curl "https://api.bliztik.web.id/apitiktok?url=https%3A%2F%2Fwww.tiktok.com%2F%40username%2Fvideo%2F1234567890123456789"
 ```
 
-You can also let your shell handle a URL with `--get` and `--data-urlencode`:
-
-```bash
-curl --get "https://api.bliztik.web.id/apitiktok" \
-  --data-urlencode "url=https://www.tiktok.com/@username/video/1234567890123456789"
-```
-
 ### JavaScript (fetch)
 
 ```js
 const tiktokUrl = "https://www.tiktok.com/@username/video/1234567890123456789";
-
-const response = await fetch(
+const endpoint =
   "https://api.bliztik.web.id/apitiktok?url=" +
-  encodeURIComponent(tiktokUrl)
-);
+  encodeURIComponent(tiktokUrl);
 
-const data = await response.json();
+const response = await fetch(endpoint);
+const result = await response.json();
 
-console.log(data);
+console.log(result);
 ```
 
 ### Python (requests)
@@ -136,18 +135,22 @@ console.log(data);
 ```py
 import requests
 
+
 tiktok_url = "https://www.tiktok.com/@username/video/1234567890123456789"
 
-response = requests.get(
-    "https://api.bliztik.web.id/apitiktok",
-    params={"url": tiktok_url},
-    timeout=15,
+from urllib.parse import quote
+
+endpoint = (
+    "https://api.bliztik.web.id/apitiktok?url="
+    + quote(tiktok_url, safe="")
 )
 
-response.raise_for_status()
-data = response.json()
+response = requests.get(endpoint, timeout=15)
 
-print(data)
+response.raise_for_status()
+result = response.json()
+
+print(result)
 ```
 
 ---
@@ -159,21 +162,21 @@ print(data)
 | Property | Value |
 | :--- | :--- |
 | **Method** | `GET` |
-| **URL** | `https://api.bliztik.web.id/apitiktok?url={TIKTOK_URL}` |
+| **URL Template** | `https://api.bliztik.web.id/apitiktok?url={TIKTOK_URL}` |
 | **Content-Type** | `application/json` |
 | **Authentication** | None |
-| **Parameter** | `url` (required) |
+| **Required Parameter** | `url` |
 | **Input** | Public TikTok URL |
 | **Output** | JSON |
-| **CORS** | Supported for browser-based integrations |
+| **CORS** | Supported |
 
-The endpoint is intended to accept common public TikTok URL formats, including:
+The endpoint is designed to accept common public TikTok URLs, including:
 
 - `https://www.tiktok.com/@username/video/...`
 - `https://vt.tiktok.com/...`
 - `https://vm.tiktok.com/...`
 
-Short links may redirect before the media is resolved.
+Short links are resolved before the requested TikTok media is parsed.
 
 ### Parameters
 
@@ -184,74 +187,165 @@ Short links may redirect before the media is resolved.
 ### Example Request
 
 ```bash
-curl --get "https://api.bliztik.web.id/apitiktok" \
-  --data-urlencode "url=https://www.tiktok.com/@username/video/1234567890123456789"
+curl "https://api.bliztik.web.id/apitiktok?url=https%3A%2F%2Fwww.tiktok.com%2F%40username%2Fvideo%2F1234567890123456789"
+```
+
+Equivalent direct URL format:
+
+```text
+https://api.bliztik.web.id/apitiktok?url=https%3A%2F%2Fwww.tiktok.com%2F%40username%2Fvideo%2F1234567890123456789
 ```
 
 ### Response
 
-A successful request returns a JSON object containing media URLs and metadata relevant to the TikTok post.
+A successful request returns an object with a numeric status code, a message, and a nested `data` object.
 
-The exact field set can vary by post type. A **video post**, **photo slideshow**, and **audio-only result** do not necessarily return identical media fields.
-
-Conceptually, a successful response may look like this:
+The current response structure is:
 
 ```json
 {
-  "video": "https://example.com/video.mp4",
-  "no_watermark_url": "https://example.com/video-no-watermark.mp4",
-  "audio_url": "https://example.com/audio.mp3",
-  "images": [],
-  "author": {
-    "username": "example"
-  },
-  "title": "Example TikTok post",
-  "quality": "HD",
-  "width": 1080,
-  "height": 1920
+  "kode": 200,
+  "msg": "Parsing berhasil - Bliz",
+  "data": {
+    "platform": "TikTok",
+    "tipe": "video",
+    "judul": "...",
+    "desc": "...",
+    "pengarang": {
+      "nama": "...",
+      "pengenal": "...",
+      "avatar": "https://..."
+    },
+    "sampul": "https://...",
+    "preview_url": "https://api.bliztik.web.id/api/proxy?...",
+    "no_watermark_url": "https://api.bliztik.web.id/api/proxy?...",
+    "audio_url": "https://api.bliztik.web.id/api/proxy?...",
+    "tautan": "https://www.tiktok.com/@username/video/...",
+    "kualitas": "1024p",
+    "durasi": 11,
+    "lebar": 576,
+    "tinggi": 1024,
+    "cadangan_video": [],
+    "gambar": [],
+    "musik": {
+      "judul": "",
+      "pengarang": "",
+      "url": "https://api.bliztik.web.id/api/proxy?...",
+      "menutupi": ""
+    },
+    "ekstra": {
+      "id_video": "",
+      "share_url": "https://www.tiktok.com/@username/video/..."
+    }
+  }
 }
 ```
-
-> The example above is **illustrative**. Field presence, nesting, naming, and media URLs may vary depending on the TikTok post and the upstream extractor.
 
 ---
 
 ## 🧾 Full Response Example
 
-This example shows the kinds of values an application can consume after a successful video response.
+The following example mirrors the **actual field structure returned by the BlizTik API**. Media URLs are shortened to keep the README readable.
 
 ```json
 {
-  "video": "https://cdn.example.com/video.mp4",
-  "no_watermark_url": "https://cdn.example.com/video-no-watermark.mp4",
-  "audio_url": "https://cdn.example.com/audio.mp3",
-  "images": [],
-  "author": {
-    "username": "example_user",
-    "nickname": "Example User"
-  },
-  "title": "Example TikTok caption",
-  "quality": "HD",
-  "width": 1080,
-  "height": 1920
+  "kode": 200,
+  "msg": "Parsing berhasil - Bliz",
+  "data": {
+    "platform": "TikTok",
+    "tipe": "video",
+    "judul": "#relatable #trend #animefyp #fypシ #xybca",
+    "desc": "#relatable #trend #animefyp #fypシ #xybca",
+    "pengarang": {
+      "nama": "rasbae``",
+      "pengenal": "",
+      "avatar": "https://p16-common-sign.tiktokcdn.com/..."
+    },
+    "sampul": "https://p16-common-sign.tiktokcdn.com/...",
+    "preview_url": "https://api.bliztik.web.id/api/proxy?...",
+    "no_watermark_url": "https://api.bliztik.web.id/api/proxy?...",
+    "audio_url": "https://api.bliztik.web.id/api/proxy?...",
+    "tautan": "https://www.tiktok.com/@rassasu/video/7684578677111164181",
+    "kualitas": "1024p",
+    "durasi": 11,
+    "lebar": 576,
+    "tinggi": 1024,
+    "cadangan_video": [],
+    "gambar": [],
+    "musik": {
+      "judul": "",
+      "pengarang": "",
+      "url": "https://api.bliztik.web.id/api/proxy?...",
+      "menutupi": ""
+    },
+    "ekstra": {
+      "id_video": "",
+      "share_url": "https://www.tiktok.com/@rassasu/video/7684578677111164181"
+    }
+  }
 }
 ```
 
-### Field reference
+> The media URLs returned by TikTok and the proxy layer may be temporary and can expire. Applications should use the URLs from the current API response instead of storing them as permanent links.
+
+## 🧩 Response Field Reference
+
+### Top-level fields
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
-| `video` | `string \| null` | Video media URL. |
-| `no_watermark_url` | `string \| null` | No-watermark video URL. |
-| `audio_url` | `string \| null` | Audio/music media URL. |
-| `images` | `array` | Image URLs for photo/slideshow posts. May be empty for video posts. |
-| `author` | `object \| null` | Author metadata returned by the extractor. |
-| `author.username` | `string \| null` | TikTok username/handle. |
-| `author.nickname` | `string \| null` | Display name. |
-| `title` | `string \| null` | Post caption/title text. |
-| `quality` | `string \| null` | Reported media quality. |
-| `width` | `number \| null` | Media width in pixels. |
-| `height` | `number \| null` | Media height in pixels. |
+| `kode` | `number` | Numeric response status. `200` indicates a successful parse. |
+| `msg` | `string` | Response message returned by the API. |
+| `data` | `object` | Parsed TikTok data. |
+
+### `data` fields
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `platform` | `string` | Platform name, normally `TikTok`. |
+| `tipe` | `string` | Parsed media type, such as `video`. |
+| `judul` | `string` | TikTok post title/caption. |
+| `desc` | `string` | TikTok post description/caption text. |
+| `pengarang` | `object` | Author information. |
+| `sampul` | `string` | Cover image URL. |
+| `preview_url` | `string` | Preview media URL served through the BlizTik proxy. |
+| `no_watermark_url` | `string` | No-watermark video URL served through the BlizTik proxy. |
+| `audio_url` | `string` | Downloadable audio URL served through the BlizTik proxy. |
+| `tautan` | `string` | Original TikTok post URL. |
+| `kualitas` | `string` | Reported media quality, such as `1024p`. |
+| `durasi` | `number` | Media duration in seconds. |
+| `lebar` | `number` | Media width in pixels. |
+| `tinggi` | `number` | Media height in pixels. |
+| `cadangan_video` | `array` | Additional video variants returned by the parser. |
+| `gambar` | `array` | Image URLs for photo/slideshow posts. |
+| `musik` | `object` | Music/audio metadata and URL. |
+| `ekstra` | `object` | Additional video/post identifiers and share information. |
+
+### `pengarang` fields
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `pengarang.nama` | `string` | Author display name. |
+| `pengarang.pengenal` | `string` | Author identifier/handle when returned. |
+| `pengarang.avatar` | `string` | Author avatar URL. |
+
+### `musik` fields
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `musik.judul` | `string` | Music title. |
+| `musik.pengarang` | `string` | Music artist/author. |
+| `musik.url` | `string` | Downloadable music URL. |
+| `musik.menutupi` | `string` | Additional music-cover information returned by the parser. |
+
+### `ekstra` fields
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `ekstra.id_video` | `string` | Video identifier when returned. |
+| `ekstra.share_url` | `string` | Shareable TikTok URL. |
+
+---
 
 ## 🔧 Code Examples & Integrations
 
@@ -269,15 +363,16 @@ Then:
 const axios = require("axios");
 
 async function getTikTokData(tiktokUrl) {
-  const response = await axios.get(
-    "https://api.bliztik.web.id/apitiktok",
-    {
-      params: {
-        url: tiktokUrl
-      },
-      timeout: 15000
+  const endpoint =
+  "https://api.bliztik.web.id/apitiktok?url=" +
+  encodeURIComponent(tiktokUrl);
+
+  const response = await axios.get(endpoint, {
+    timeout: 15000,
+    headers: {
+      Accept: "application/json"
     }
-  );
+  });
 
   return response.data;
 }
@@ -310,19 +405,21 @@ Then:
 
 ```py
 import asyncio
+from urllib.parse import quote
+
 import aiohttp
 
 
-API_URL = "https://api.bliztik.web.id/apitiktok"
-
-
 async def get_tiktok_data(tiktok_url: str):
-    params = {"url": tiktok_url}
+    endpoint = (
+        "https://api.bliztik.web.id/apitiktok?url="
+        + quote(tiktok_url, safe="")
+    )
 
     timeout = aiohttp.ClientTimeout(total=15)
 
     async with aiohttp.ClientSession(timeout=timeout) as session:
-        async with session.get(API_URL, params=params) as response:
+        async with session.get(endpoint) as response:
             response.raise_for_status()
             return await response.json()
 
@@ -346,9 +443,7 @@ if __name__ == "__main__":
 
 $tiktokUrl = 'https://www.tiktok.com/@username/video/1234567890123456789';
 
-$apiUrl = 'https://api.bliztik.web.id/apitiktok?' . http_build_query([
-    'url' => $tiktokUrl,
-]);
+$apiUrl = 'https://api.bliztik.web.id/apitiktok?url=' . rawurlencode($tiktokUrl);
 
 $ch = curl_init($apiUrl);
 
@@ -384,7 +479,7 @@ print_r($data);
 
 ### HTML / Vanilla JavaScript (fetch)
 
-Because the API supports CORS, it can be called directly from browser-based applications without requiring your own backend proxy for the basic request flow.
+Because the API supports CORS, it can be called directly from browser-based applications without requiring a custom backend proxy for the basic request flow.
 
 ```html
 <!doctype html>
@@ -424,14 +519,14 @@ Because the API supports CORS, it can be called directly from browser-based appl
       output.textContent = "Loading...";
 
       try {
-        const requestUrl =
+        const endpoint =
           "https://api.bliztik.web.id/apitiktok?url=" +
           encodeURIComponent(tiktokUrl);
 
-        const response = await fetch(requestUrl, {
+        const response = await fetch(endpoint, {
           method: "GET",
           headers: {
-            "Accept": "application/json"
+            Accept: "application/json"
           },
           cache: "no-store"
         });
@@ -439,15 +534,12 @@ Because the API supports CORS, it can be called directly from browser-based appl
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(
-            `HTTP ${response.status}`
-          );
+          throw new Error(`HTTP ${response.status}`);
         }
 
         output.textContent = JSON.stringify(data, null, 2);
       } catch (error) {
-        output.textContent =
-          `Request failed: ${error.message}`;
+        output.textContent = `Request failed: ${error.message}`;
       } finally {
         button.disabled = false;
       }
@@ -461,26 +553,11 @@ Because the API supports CORS, it can be called directly from browser-based appl
 
 ## 🗺️ Roadmap
 
-The roadmap may evolve as the project grows.
+BlizTik currently focuses on its core TikTok downloader API and the features already documented above.
 
-- [x] Public TikTok downloader endpoint
-- [x] No API key for the public endpoint
-- [x] Video support
-- [x] No-watermark video support
-- [x] Photo / slideshow support
-- [x] Audio support
-- [x] Metadata support
-- [x] CORS support
-- [ ] 🔎 TikTok search
-- [ ] 📈 Trending content endpoint
-- [ ] 👤 User profile / user info endpoint
-- [ ] 🎞️ More media quality metadata
-- [ ] 🧰 More developer utilities
-- [ ] 📘 Expanded API documentation
-- [ ] 🧪 Automated integration tests
-- [ ] 📊 Public service health / metrics page
+Future improvements will be announced in the repository as they are planned and implemented.
 
-Have an idea that would make the API better? Open a feature request in the repository.
+Have an idea that would make BlizTik better? Open a feature request in the repository.
 
 ---
 
@@ -488,37 +565,25 @@ Have an idea that would make the API better? Open a feature request in the repos
 
 ### Is BlizTik really unlimited?
 
-The public API does **not publish a fixed daily quota or per-user rate limit** in this project. That is different from promising that unlimited traffic is guaranteed under every circumstance.
+The public endpoint has **no fixed daily quota published in this repository**. That does not mean unlimited traffic is guaranteed under every infrastructure or upstream condition.
 
-Normal and responsible use is expected. Very high-volume, abusive, automated, or infrastructure-heavy traffic may still be affected by upstream provider limits, infrastructure protection, or operational changes.
+Please use the service responsibly. Extremely high-volume or abusive traffic may still be affected by infrastructure protection, upstream availability, or operational changes.
 
 ### Why is the response so fast?
 
-BlizTik is designed around a lightweight REST request flow and a small integration surface. In normal conditions, the project targets **sub-2-second response times**, but actual latency depends on DNS, network quality, TikTok availability, redirects, upstream extraction, and media complexity.
-
-A sub-2-second figure should therefore be understood as a **performance target**, not a universal SLA.
+BlizTik is designed around a lightweight REST request flow and a direct media extraction pipeline. Under normal conditions, the project targets **sub-2-second responses**, but real latency can vary with network quality, redirects, TikTok availability, upstream extraction, and media complexity.
 
 ### Is BlizTik safe for production?
 
-It can be used as part of a production application, but treat the public API as an external dependency.
+BlizTik can be integrated into production applications, but the public API should still be treated as an external service dependency.
 
-For production workloads, you should:
-
-- Handle non-200 HTTP responses.
-- Add request timeouts.
-- Validate the JSON response before using a field.
-- Cache repeated requests when appropriate.
-- Monitor failures and latency.
-- Keep a fallback strategy for critical applications.
-- Respect applicable third-party platform policies and content rights.
-
-Do not build a business-critical system around the assumption that any free public endpoint will provide an unconditional SLA.
+For production workloads, handle HTTP errors, use reasonable timeouts, validate returned fields, monitor failures, and keep a fallback strategy for critical systems.
 
 ### What if the API is down?
 
-Use normal HTTP failure handling in your application.
+Use standard HTTP failure handling and retry only when appropriate. For critical applications, consider a fallback architecture rather than relying on a single public endpoint.
 
-Recommended production behavior:
+Example:
 
 ```js
 try {
@@ -535,51 +600,43 @@ try {
 }
 ```
 
-For higher availability requirements, consider adding a fallback provider or your own extraction service.
+### Does BlizTik require an API key?
 
-### Does BlizTik have a Terms of Service?
+**No.** The public endpoint documented in this README does not require an API key or authentication header.
 
-Use of the API should be responsible and lawful. You are responsible for ensuring that your application, your use of returned media, and your handling of third-party content comply with applicable laws, TikTok's terms, and any other policies relevant to your project.
+### Can I call BlizTik directly from a website?
 
-Because policies can change, review the current policies before deploying a commercial or high-volume integration.
+**Yes.** CORS support allows browser-based applications to call the API directly using `fetch()`.
 
-### Does the API require an API key?
+### Which TikTok URLs are supported?
 
-**No.**
+The endpoint is designed for common public TikTok URLs, including standard video URLs and short links such as `vt.tiktok.com` and `vm.tiktok.com`.
 
-The public endpoint documented in this README is designed to be called without an API key.
+### What does the API return?
 
-### Can I use BlizTik directly from a website?
+A successful response uses the following top-level structure:
 
-**Yes.**
+```json
+{
+  "kode": 200,
+  "msg": "Parsing berhasil - Bliz",
+  "data": {}
+}
+```
 
-CORS support is intended to make browser-based `fetch()` requests possible without requiring a custom backend proxy for the basic integration.
+The `data` object contains media URLs, post metadata, author information, audio information, and additional fields depending on the TikTok post type.
 
-### Does it support `vt.tiktok.com` and `vm.tiktok.com` links?
+### Does the API support photo posts?
 
-The endpoint accepts common public TikTok share URLs, including short-link formats such as `vt.tiktok.com` and `vm.tiktok.com`.
+**Yes.** Photo and slideshow results are represented through the `gambar` array, while video results include video and preview URLs.
 
-Short links may redirect before the media is resolved.
+### Does the API provide audio separately?
+
+**Yes.** The response includes `audio_url` and a nested `musik` object containing audio metadata and its downloadable `url`.
 
 ### Is there an SDK?
 
-There is no SDK requirement.
-
-Any language or framework capable of making an HTTPS `GET` request can integrate with the endpoint.
-
-### Can I use it for a bot?
-
-Yes. BlizTik can be integrated into:
-
-- Telegram bots
-- WhatsApp bots
-- Discord bots
-- Webhook systems
-- CLI tools
-- Backend services
-- Mobile applications
-
-Always account for your own platform's bot rules and the volume of requests generated by your users.
+No SDK is required. Any language or framework capable of making an HTTPS GET request can integrate with the endpoint.
 
 ---
 
@@ -587,7 +644,7 @@ Always account for your own platform's bot rules and the volume of requests gene
 
 Contributions are welcome! ❤️
 
-If you find a bug, have an optimization idea, or want to add a feature, please open an issue or pull request.
+If you find a bug, have an optimization idea, or want to add a feature, open an issue or pull request on the main repository.
 
 ### Contribution flow
 
@@ -596,8 +653,6 @@ Fork → Create Branch → Make Changes → Test → Commit → Push → Pull Re
 ```
 
 ### 1. Fork the repository
-
-Open the GitHub repository and create your own fork:
 
 https://github.com/BlizPS/bliztik-api/fork
 
@@ -620,16 +675,16 @@ Keep changes focused, readable, and easy to review.
 
 ### 5. Test your changes
 
-Verify that the API integration or affected files work as expected before opening a PR.
+Verify that the API integration and affected files work as expected before opening a PR.
 
-### 6. Commit
+### 6. Commit your changes
 
 ```bash
 git add .
 git commit -m "feat: improve API integration"
 ```
 
-### 7. Push
+### 7. Push your branch
 
 ```bash
 git push origin feature/my-improvement
@@ -637,14 +692,9 @@ git push origin feature/my-improvement
 
 ### 8. Open a Pull Request
 
-Create a PR against the `main` branch and describe:
+Create a PR against the `main` branch and describe what changed, why it changed, and how it was tested.
 
-- What changed
-- Why it changed
-- How it was tested
-- Any limitations or follow-up work
-
-For the latest project context and contribution discussion, visit the repository home:
+For the latest project information and contribution discussion, use the repository home:
 
 https://github.com/BlizPS/bliztik-api
 
@@ -668,8 +718,6 @@ BlizTik API is released under the **MIT License**.
 
 See the full license text in [`LICENSE`](LICENSE).
 
-In short, the MIT License permits use, modification, distribution, and private or commercial use, subject to the license conditions.
-
 ---
 
 ## ❤️ Credits
@@ -684,7 +732,7 @@ BlizTik API is developed and maintained by **BlizPS**.
 - Direct API Endpoint: https://api.bliztik.web.id/apitiktok?url=
 - Test API: https://bliztik-api.vercel.app/
 
-### Reporting bugs
+### Reporting Bugs
 
 Found something broken?
 
@@ -692,14 +740,7 @@ Open an issue:
 
 https://github.com/BlizPS/bliztik-api/issues/new
 
-Useful bug reports should include:
-
-- The endpoint you called
-- The request format
-- The HTTP status code
-- A sanitized response example
-- The approximate time of the problem
-- Steps to reproduce
+When reporting a bug, include the request format, HTTP status code, a sanitized response example, approximate time, and reproduction steps.
 
 Never post private credentials, API tokens, cookies, or other sensitive information in an issue.
 
@@ -707,9 +748,7 @@ Never post private credentials, API tokens, cookies, or other sensitive informat
 
 ## ⭐ Support the Project
 
-BlizTik is built for developers who want a simple API that just gets the job done.
-
-If this project is useful to you, consider giving the repository a star:
+If BlizTik is useful to you, consider giving the repository a star:
 
 https://github.com/BlizPS/bliztik-api
 
