@@ -68,9 +68,9 @@ BlizTik keeps the integration model intentionally simple: **one public endpoint,
 - ♾️ **No Fixed Public Quota** — no fixed per-user daily quota is published for the public endpoint.
 - 🎬 **HD Video** — supports high-quality video output, including the `1024p` quality shown by the live API response.
 - 🧼 **No-Watermark Video** — provides a dedicated `no_watermark_url` for video downloads.
-- 📸 **Photo & Slideshow** — supports image-based TikTok posts through the `gambar` field.
-- 🎵 **Audio** — provides direct audio information and a downloadable `musik.url` value.
-- 🖼️ **Cover Image** — returns a post cover through the `sampul` field.
+- 📸 **Photo & Slideshow** — supports image-based TikTok posts through the `images` field.
+- 🎵 **Audio** — provides direct audio information and a downloadable `music.url` value.
+- 🖼️ **Cover Image** — returns a post cover through the `cover_url` field.
 - 👤 **Author Metadata** — returns author name, identifier, and avatar information.
 - 📝 **Post Metadata** — returns title, description, source URL, media type, quality, duration, and dimensions.
 - 🌐 **CORS Support** — suitable for direct browser-side API requests.
@@ -200,41 +200,41 @@ https://api.bliztik.web.id/apitiktok?url=https%3A%2F%2Fwww.tiktok.com%2F%40usern
 
 A successful request returns an object with a numeric status code, a message, and a nested `data` object.
 
-The current response structure is:
+The documentation-friendly response structure is:
 
 ```json
 {
-  "kode": 200,
-  "msg": "Parsing successful - Bliz",
+  "status_code": 200,
+  "message": "Parsing successful - Bliz",
   "data": {
     "platform": "TikTok",
-    "tipe": "video",
-    "judul": "...",
-    "desc": "...",
-    "pengarang": {
-      "nama": "...",
-      "pengenal": "...",
+    "media_type": "video",
+    "title": "...",
+    "description": "...",
+    "author": {
+      "name": "...",
+      "handle": "...",
       "avatar": "https://..."
     },
-    "sampul": "https://...",
+    "cover_url": "https://...",
     "preview_url": "https://api.bliztik.web.id/api/proxy?...",
     "no_watermark_url": "https://api.bliztik.web.id/api/proxy?...",
     "audio_url": "https://api.bliztik.web.id/api/proxy?...",
-    "tautan": "https://www.tiktok.com/@username/video/...",
-    "kualitas": "1024p",
-    "durasi": 11,
-    "lebar": 576,
-    "tinggi": 1024,
-    "cadangan_video": [],
-    "gambar": [],
-    "musik": {
-      "judul": "",
-      "pengarang": "",
+    "source_url": "https://www.tiktok.com/@username/video/...",
+    "quality": "1024p",
+    "duration": 11,
+    "width": 576,
+    "height": 1024,
+    "alternative_videos": [],
+    "images": [],
+    "music": {
+      "title": "",
+      "author": "",
       "url": "https://api.bliztik.web.id/api/proxy?...",
-      "menutupi": ""
+      "cover": ""
     },
-    "ekstra": {
-      "id_video": "",
+    "extra": {
+      "video_id": "",
       "share_url": "https://www.tiktok.com/@username/video/..."
     }
   }
@@ -245,48 +245,50 @@ The current response structure is:
 
 ## 🧾 Full Response Example
 
-The following example mirrors the **actual field structure returned by the BlizTik API**. Media URLs are shortened to keep the README readable.
+The example below uses **English-friendly field names** to keep the documentation easy to read and free of creator-specific information. The live API may preserve legacy field names in its raw JSON response. Media URLs are shortened for readability and may expire.
 
 ```json
 {
-  "kode": 200,
-  "msg": "Parsing successful - Bliz",
+  "status_code": 200,
+  "message": "Parsing successful - Bliz",
   "data": {
     "platform": "TikTok",
-    "tipe": "video",
-    "judul": "Example TikTok post",
-    "desc": "Example TikTok post description",
-    "pengarang": {
-      "nama": "Example Creator",
-      "pengenal": "@example",
+    "media_type": "video",
+    "title": "Example TikTok post",
+    "description": "Example TikTok post description",
+    "author": {
+      "name": "Example Creator",
+      "handle": "@example",
       "avatar": "https://example.com/avatar.jpg"
     },
-    "sampul": "https://example.com/cover.jpg",
+    "cover_url": "https://example.com/cover.jpg",
     "preview_url": "https://api.bliztik.web.id/api/proxy?...",
     "no_watermark_url": "https://api.bliztik.web.id/api/proxy?...",
     "audio_url": "https://api.bliztik.web.id/api/proxy?...",
-    "tautan": "https://www.tiktok.com/@example/video/...",
-    "kualitas": "1024p",
-    "durasi": 11,
-    "lebar": 576,
-    "tinggi": 1024,
-    "cadangan_video": [],
-    "gambar": [],
-    "musik": {
-      "judul": "",
-      "pengarang": "",
+    "source_url": "https://www.tiktok.com/@example/video/...",
+    "quality": "1024p",
+    "duration": 11,
+    "width": 576,
+    "height": 1024,
+    "alternative_videos": [],
+    "images": [],
+    "music": {
+      "title": "",
+      "artist": "",
       "url": "https://api.bliztik.web.id/api/proxy?...",
-      "menutupi": ""
+      "cover": ""
     },
-    "ekstra": {
-      "id_video": "",
+    "extra": {
+      "video_id": "",
       "share_url": "https://www.tiktok.com/@example/video/..."
     }
   }
 }
 ```
 
-> The media URLs returned by TikTok and the proxy layer may be temporary and can expire. Applications should use the URLs from the current API response instead of storing them as permanent links.
+> **Privacy note:** No real creator username, post ID, title, or personal media URL is included in the documentation examples.
+
+> **Media URL note:** URLs returned by TikTok and the BlizTik proxy may be temporary and can expire. Use the URLs from the latest API response rather than treating them as permanent links.
 
 ## 🧩 Response Field Reference
 
@@ -294,56 +296,57 @@ The following example mirrors the **actual field structure returned by the BlizT
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
-| `kode` | `number` | Numeric response status. `200` indicates a successful parse. |
-| `msg` | `string` | Response message returned by the API. |
-| `data` | `object` | Parsed TikTok data. |
+| `status_code` | `number` | Numeric response status. `200` indicates a successful parse. |
+| `message` | `string` | Response message returned by the service. |
+| `data` | `object` | Parsed TikTok media and metadata. |
 
-### `data` fields
-
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `platform` | `string` | Platform name, normally `TikTok`. |
-| `tipe` | `string` | Parsed media type, such as `video`. |
-| `judul` | `string` | TikTok post title/caption. |
-| `desc` | `string` | TikTok post description/caption text. |
-| `pengarang` | `object` | Author information. |
-| `sampul` | `string` | Cover image URL. |
-| `preview_url` | `string` | Preview media URL served through the BlizTik proxy. |
-| `no_watermark_url` | `string` | No-watermark video URL served through the BlizTik proxy. |
-| `audio_url` | `string` | Downloadable audio URL served through the BlizTik proxy. |
-| `tautan` | `string` | Original TikTok post URL. |
-| `kualitas` | `string` | Reported media quality, such as `1024p`. |
-| `durasi` | `number` | Media duration in seconds. |
-| `lebar` | `number` | Media width in pixels. |
-| `tinggi` | `number` | Media height in pixels. |
-| `cadangan_video` | `array` | Additional video variants returned by the parser. |
-| `gambar` | `array` | Image URLs for photo/slideshow posts. |
-| `musik` | `object` | Music/audio metadata and URL. |
-| `ekstra` | `object` | Additional video/post identifiers and share information. |
-
-### `pengarang` fields
+### Data fields
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
-| `pengarang.nama` | `string` | Author display name. |
-| `pengarang.pengenal` | `string` | Author identifier/handle when returned. |
-| `pengarang.avatar` | `string` | Author avatar URL. |
+| `platform` | `string` | Source platform name. |
+| `media_type` | `string` | Parsed media type, such as `video` or `photo`. |
+| `title` | `string` | Post title or caption. |
+| `description` | `string` | Post description or caption text. |
+| `author` | `object` | Creator information. |
+| `cover_url` | `string` | Cover image URL. |
+| `preview_url` | `string` | Preview media URL. |
+| `no_watermark_url` | `string` | No-watermark video URL. |
+| `audio_url` | `string` | Downloadable audio URL. |
+| `source_url` | `string` | Original TikTok post URL. |
+| `quality` | `string` | Reported media quality, such as `1024p`. |
+| `duration` | `number` | Media duration in seconds. |
+| `width` | `number` | Media width in pixels. |
+| `height` | `number` | Media height in pixels. |
+| `alternative_videos` | `array` | Additional video variants, when provided. |
+| `images` | `array` | Image URLs for photo or slideshow posts. |
+| `music` | `object` | Music metadata and download URL. |
+| `extra` | `object` | Additional identifiers and share information. |
 
-### `musik` fields
+### Author fields
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
-| `musik.judul` | `string` | Music title. |
-| `musik.pengarang` | `string` | Music artist/author. |
-| `musik.url` | `string` | Downloadable music URL. |
-| `musik.menutupi` | `string` | Additional music-cover information returned by the parser. |
+| `author.name` | `string` | Creator display name. |
+| `author.handle` | `string` | Creator username or handle, when available. |
+| `author.avatar` | `string` | Creator avatar URL. |
 
-### `ekstra` fields
+### Music fields
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
-| `ekstra.id_video` | `string` | Video identifier when returned. |
-| `ekstra.share_url` | `string` | Shareable TikTok URL. |
+| `music.title` | `string` | Music title. |
+| `music.artist` | `string` | Music artist or creator. |
+| `music.url` | `string` | Downloadable music URL. |
+| `music.cover` | `string` | Music cover information, when available. |
+
+### Extra fields
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `extra.video_id` | `string` | Video identifier, when available. |
+| `extra.share_url` | `string` | Shareable TikTok URL. |
+
 
 ---
 
@@ -618,8 +621,8 @@ A successful response uses the following top-level structure:
 
 ```json
 {
-  "kode": 200,
-  "msg": "Parsing successful - Bliz",
+  "status_code": 200,
+  "message": "Parsing successful - Bliz",
   "data": {}
 }
 ```
@@ -628,11 +631,11 @@ The `data` object contains media URLs, post metadata, author information, audio 
 
 ### Does the API support photo posts?
 
-**Yes.** Photo and slideshow results are represented through the `gambar` array, while video results include video and preview URLs.
+**Yes.** Photo and slideshow results are represented through the `images` array, while video results include video and preview URLs.
 
 ### Does the API provide audio separately?
 
-**Yes.** The response includes `audio_url` and a nested `musik` object containing audio metadata and its downloadable `url`.
+**Yes.** The response includes `audio_url` and a nested `music` object containing audio metadata and its downloadable `url`.
 
 ### Is there an SDK?
 
